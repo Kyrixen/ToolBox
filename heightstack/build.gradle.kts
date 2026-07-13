@@ -41,6 +41,14 @@ publishing {
 }
 
 signing {
-    useGpgCmd()
+    val signingKey = providers.gradleProperty("signingKey").orNull
+    val signingPassword = providers.gradleProperty("signingPassword").orNull
+
+    if (signingKey != null && signingPassword != null) {
+        useInMemoryPgpKeys(signingKey, signingPassword)
+    } else {
+        useGpgCmd()
+    }
+
     sign(publishing.publications["mavenJava"])
 }

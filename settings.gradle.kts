@@ -15,8 +15,13 @@ include("collision", "heightstack")
 
 nmcpSettings {
     centralPortal {
-        username = providers.gradleProperty("mavenCentralUsername").get()
-        password = providers.gradleProperty("mavenCentralPassword").get()
+        providers.gradleProperty("mavenCentralUsername").orNull?.let {
+            username = it
+        }
+
+        providers.gradleProperty("mavenCentralPassword").orNull?.let {
+            password = it
+        }
 
         publishingType = "USER_MANAGED"
         publicationName = "KyrixenToolBox 0.1.0"
