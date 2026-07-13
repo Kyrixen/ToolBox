@@ -22,7 +22,7 @@ subprojects {
         targetCompatibility = JavaVersion.VERSION_1_8
 
         withSourcesJar()
-        withJavadocJar()
+        //withJavadocJar()
 
     }
 

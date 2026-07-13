@@ -11,8 +11,16 @@ jobs:
     permissions:
       contents: read
 
+    env:
+      ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+      ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+      ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.SIGNING_KEY }}
+      ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_PASSWORD }}
+
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Validate Gradle Wrapper
         uses: gradle/actions/wrapper-validation@v4
@@ -25,11 +33,58 @@ jobs:
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
-      
-      - name: Publish to Maven Central
-        run: ./gradlew publishAggregationToCentralPortal
-        env:
-          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
-          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
-          ORG_GRADLE_PROJECT_signingKey: ${{ secrets.SIGNING_KEY }}
-          ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.SIGNING_PASSWORD }}
+
+      - name: Detect changed modules
+        id: modules
+        shell: bash
+        run: |
+          MODULES=$(grep '^include(' settings.gradle.kts \
+            | sed -E 's/include\((.*)\)/\1/' \
+            | tr -d '"' \
+            | tr -d "'" \
+            | tr ',' '\n' \
+            | xargs)
+
+          echo "Detected modules: $MODULES"
+
+          git fetch --tags
+
+          PREVIOUS_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || true)
+
+          # First release -> publish everything
+          if [ -z "$PREVIOUS_TAG" ]; then
+            echo "modules=$MODULES" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          git show "$PREVIOUS_TAG:gradle.properties" > old.properties
+
+          CHANGED=""
+
+          for MODULE in $MODULES; do
+            KEY="${MODULE}Ver"
+
+            OLD=$(grep "^${KEY}=" old.properties 2>/dev/null | cut -d= -f2 || true)
+            NEW=$(grep "^${KEY}=" gradle.properties 2>/dev/null | cut -d= -f2 || true)
+
+            # Skip modules without a version property
+            [ -z "$NEW" ] && continue
+
+            # Publish if it's a new module or the version changed
+            if [ -z "$OLD" ] || [ "$OLD" != "$NEW" ]; then
+              CHANGED="$CHANGED $MODULE"
+            fi
+          done
+
+          CHANGED=$(echo "$CHANGED" | xargs)
+
+          echo "Modules to publish: $CHANGED"
+          echo "modules=$CHANGED" >> "$GITHUB_OUTPUT"
+
+      - name: Publish changed modules
+        shell: bash
+        run: |
+          for MODULE in ${{ steps.modules.outputs.modules }}; do
+            echo "Publishing $MODULE..."
+            ./gradlew :${MODULE}:publishAndReleaseToMavenCentral
+          done
