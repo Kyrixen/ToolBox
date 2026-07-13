@@ -13,16 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package io.kyrixen.tinyblox.collision;
 
 
-// AABB object class
+/**
+ * Represents a 2D axis-aligned bounding box (AABB).
+ * <p>
+ * An AABB is defined by its top-left position and dimensions.
+ * The bounding box is aligned with the coordinate axes and is
+ * commonly used for collision detection and spatial queries.
+ */
 public class AABB {
 
+    // The bouding box coordinates
     protected final int x, y;
+
+    // The bounding box dimensions
     protected final int w, h;
     
+    
+    /**
+     * Creates a new axis-aligned bounding box.
+     *
+     * <p>Width and height should be non-negative.
+     *
+     * @param x x-coordinate of the top-left corner
+     * @param y y-coordinate of the top-left corner
+     * @param w width of the bounding box
+     * @param h height of the bounding box
+     */
     public AABB(int x, int y, int w, int h) {
         
         this.x = x;
@@ -32,13 +51,39 @@ public class AABB {
         this.h = h;
     
     }
+    
 
+    /**
+     * Returns the top-left x-coordinate.
+     *
+     * @return the x-coordinate
+     */
     public int x() { return x; }
+    
+    /**
+     * Returns the top-left y-coordinate.
+     *
+     * @return the y-coordinate
+     */
     public int y() { return y; }
 
+
+    /**
+     * Returns the width.
+     *
+     * @return the width
+     */
     public int width() { return w; }
+    
+    /**
+     * Returns the height.
+     *
+     * @return the height
+     */
     public int height() { return h; }
 
+
+    // Ovveride equeals method to match the same dimensions and coords
     @Override
     public boolean equals(Object o) {
 
@@ -49,6 +94,7 @@ public class AABB {
 
     }
 
+    // Do the same but with hashCode
     @Override
     public int hashCode() {
     
@@ -62,6 +108,7 @@ public class AABB {
     
     }
 
+    // Override toString for better readability
     @Override
     public String toString() {
         return "AABB{ x=" + this.x + ", y=" + this.y + ", w=" + this.w + ", h=" + this.h + " }";
