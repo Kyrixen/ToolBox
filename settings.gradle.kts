@@ -11,10 +11,12 @@ plugins {
 
 rootProject.name = "kyrixen-toolbox"
 
-include("collision", "heightstack")
+include("collision", "heightstack", "logger")
 
 nmcpSettings {
+
     centralPortal {
+
         providers.gradleProperty("mavenCentralUsername").orNull?.let {
             username = it
         }
@@ -23,7 +25,11 @@ nmcpSettings {
             password = it
         }
 
+        val projectVersion = providers.gradleProperty("projectVer").get()
+
         publishingType = "USER_MANAGED"
-        publicationName = "KyrixenToolBox 0.1.0"
+        publicationName = "KyrixenToolBox" + projectVersion
+
     }
+
 }

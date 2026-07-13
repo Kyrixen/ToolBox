@@ -4,6 +4,8 @@ plugins {
     signing
 }
 
+version = rootProject.property("collisionVer") as String
+
 publishing {
     publications {
         create<MavenPublication>("mavenJava") {

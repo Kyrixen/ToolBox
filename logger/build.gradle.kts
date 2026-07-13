@@ -4,18 +4,18 @@ plugins {
     signing
 }
 
-version = rootProject.property("heightstackVer") as String
+version = rootProject.property("loggerVer") as String
 
 publishing {
     publications {
         create<MavenPublication>("mavenJava") {
             from(components["java"])
 
-            artifactId = "heightstack"
+            artifactId = "logger"
 
             pom {
-                name.set("HeightStack")
-                description.set("A lightweight layered terrain library for Java.")
+                name.set("Logger")
+                description.set("A Lightweight Logger for Java.")
                 url.set("https://github.com/Kyrixen/ToolBox")
 
                 licenses {

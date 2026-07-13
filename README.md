@@ -1,20 +1,19 @@
 # Kyrixen Libraries
 
-A collection of lightweight Java libraries extracted from my game development projects.
+A collection of lightweight, independent Java libraries extracted from my game development projects.
 
-All libraries target **Java 8** and have minimal or no external dependencies.
+All libraries target **Java 8**, have minimal or no external dependencies, and are designed to be reusable in any Java application.
 
 ## Libraries
 
 ### HeightStack
 
-A layered height-based terrain library.
+A layered terrain library for representing height-based worlds.
 
-Features:
+**Features**
 
 - Generic terrain model
 - Chunk-based storage
-- Vertical TileStacks
 - Generic tile types
 - Pure Java
 
@@ -31,12 +30,25 @@ Terrain
 
 A lightweight 2D collision library.
 
-Features:
+**Features**
 
 - Axis-Aligned Bounding Boxes (AABB)
-- Collision testing
+- Collision detection
 - Distance calculations
-- Zero dependencies
+- Pure Java
+
+---
+
+### Logger
+
+A lightweight color console logger.
+
+**Features**
+
+- ANSI color support
+- Optional debug logging
+- Built-in info, warn, error, and debug levels
+- Pure Java
 
 ---
 
@@ -45,23 +57,30 @@ Features:
 ### Gradle
 
 ```kotlin
-implementation("dev.kyrixen.libs:heightstack:1.0.0")
-implementation("dev.kyrixen.libs:collision:1.0.0")
+implementation("io.github.kyrixen:heightstack:0.1.0")
+implementation("io.github.kyrixen:collision:0.1.0")
+implementation("io.github.kyrixen:logger:0.1.0")
 ```
 
 ### Maven
 
 ```xml
 <dependency>
-    <groupId>dev.kyrixen.libs</groupId>
+    <groupId>io.github.kyrixen</groupId>
     <artifactId>heightstack</artifactId>
-    <version>1.0.0</version>
+    <version>0.1.0</version>
 </dependency>
 
 <dependency>
-    <groupId>dev.kyrixen.libs</groupId>
+    <groupId>io.github.kyrixen</groupId>
     <artifactId>collision</artifactId>
-    <version>1.0.0</version>
+    <version>0.1.0</version>
+</dependency>
+
+<dependency>
+    <groupId>io.github.kyrixen</groupId>
+    <artifactId>logger</artifactId>
+    <version>0.1.0</version>
 </dependency>
 ```
 
