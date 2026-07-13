@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.kyrixen.tinyblox.collision;
+package collision;
 
 
 /**
@@ -26,8 +26,8 @@ public class AABBCollision {
     /**
      * Checks whether two bounding boxes collide.
      *
-     * @param first the first bounding box
-     * @param second the second bounding box
+     * @param ab1 the first bounding box
+     * @param ab2 the second bounding box
      * @return {@code true} if the boxes overlap;
      *         {@code false} otherwise
      */
@@ -43,8 +43,8 @@ public class AABBCollision {
     /**
      * Determines two bounding boxes distance.
      *
-     * @param first the first bounding box
-     * @param second the second bounding box
+     * @param ab1 the first bounding box
+     * @param ab2 the second bounding box
      * @return {@code distance} the boxes distance;
      */
     public static float distance(AABB ab1, AABB ab2) {

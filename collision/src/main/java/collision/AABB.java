@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.kyrixen.tinyblox.collision;
+package collision;
 
 
 /**
@@ -26,10 +26,10 @@ package io.kyrixen.tinyblox.collision;
 public class AABB {
 
     // The bouding box coordinates
-    protected final int x, y;
+    private final int x, y;
 
     // The bounding box dimensions
-    protected final int w, h;
+    private final int w, h;
     
     
     /**
@@ -83,7 +83,7 @@ public class AABB {
     public int height() { return h; }
 
 
-    // Ovveride equeals method to match the same dimensions and coords
+    // Override equeals method to match the same dimensions and coords
     @Override
     public boolean equals(Object o) {
 

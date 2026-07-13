@@ -13,30 +13,55 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package io.kyrixen.tinyblox.world.chunk;
+package heightstack.chunk;
 
 import java.util.Objects;
 
-// Chunk position helper
+
+/**
+ * Represents the position of a chunk within a terrain.
+ * <p>
+ * Chunk positions are immutable and are commonly used as keys
+ * when storing chunks in maps.
+ */
 public class ChunkPos {
 
+    // Chunk coordinates
     private final short chunkX;
     private final short chunkY;
+
     
+    /**
+     * Creates a new chunk position.
+     *
+     * @param cx the chunk x-coordinate
+     * @param cy the chunk y-coordinate
+     */
     public ChunkPos(short cx, short cy) {
         this.chunkX = cx;
         this.chunkY = cy;
     }
 
+
+    /**
+     * Returns the chunk x-coordinate.
+     *
+     * @return the x-coordinate
+     */
     public short cx() {
         return this.chunkX;
     }
 
+    /**
+     * Returns the chunk y-coordinate.
+     *
+     * @return the y-coordinate
+     */
     public short cy() {
         return this.chunkY;
     }
 
+    // Override equals to compare chunk positions
     @Override
     public boolean equals(Object o) {
     
@@ -49,11 +74,13 @@ public class ChunkPos {
 
     }
 
+    // Override hashcode to hash chunk positions
     @Override
     public int hashCode() {
        return Objects.hash(chunkX, chunkY);
     }
 
+    // Override toString to display chunk positions
     @Override
     public String toString() {
         return "ChunkPos{ x=" + chunkX + ", y=" + chunkY + " }";

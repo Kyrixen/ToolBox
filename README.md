@@ -65,15 +65,6 @@ implementation("dev.kyrixen.libs:collision:1.0.0")
 </dependency>
 ```
 
-## Roadmap
-
-Planned libraries:
-
-- HeightStack
-- Collision
-- UI (planned)
-- Additional utilities (planned)
-
 ## License
 
 Licensed under the Apache License 2.0.

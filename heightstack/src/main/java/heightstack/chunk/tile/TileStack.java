@@ -13,31 +13,65 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package io.kyrixen.tinyblox.world.chunk.tile;
+package heightstack.chunk.tile;
 
 import java.util.ArrayList;
 import java.util.List;
 
-// Tile stack (used for storing)
+
+/**
+ * Represents a stack of {@link Tile tiles} ordered by elevation.
+ * <p>
+ * A {@code TileStack} stores tiles at different levels, allowing
+ * multiple layers to occupy the same world position.
+ *
+ * @param <TTile> the tile type stored in this stack
+ */
 public class TileStack<TTile extends Tile>  {
 
+    // List of the tiles
     private final List<TTile> tiles;
 
+    // Modified flag
     private boolean modified = true;
 
+
+    /**
+     * Creates a tile stack using the specified backing list.
+     *
+     * @param tiles the initial tile storage
+     */
     public TileStack(List<TTile> tiles) {
         this.tiles = tiles;
     }
 
+    /**
+     * Creates an empty tile stack.
+     */
     public TileStack() {
         this.tiles = new ArrayList<>();
     }
 
+
+    /**
+     * Returns the current storage capacity of this stack.
+     * <p>
+     * This is the number of levels currently allocated,
+     * including empty ({@code null}) entries.
+     *
+     * @return the current capacity
+     */
     public byte capacity() {
         return (byte) tiles.size();
     }
 
+    /**
+     * Returns the height of the stack.
+     * <p>
+     * The height is equal to the highest occupied level plus one.
+     *
+     * @return the stack height
+     */
     public byte height() {
 
         TTile top = this.top();
@@ -47,6 +81,12 @@ public class TileStack<TTile extends Tile>  {
 
     }
 
+
+    /**
+     * Returns the highest non-null tile.
+     *
+     * @return the highest tile, or {@code null} if the stack is empty
+     */
     public TTile top() {
 
         for(int i = tiles.size() - 1; i >= 0; i--) {
@@ -62,6 +102,11 @@ public class TileStack<TTile extends Tile>  {
 
     }
 
+    /**
+     * Returns the lowest non-null tile.
+     *
+     * @return the lowest tile, or {@code null} if the stack is empty
+     */
     public TTile bottom() {
 
         for(int i = 0; i < tiles.size(); i++) {
@@ -77,6 +122,12 @@ public class TileStack<TTile extends Tile>  {
 
     }
 
+    
+    /**
+     * Removes the tile at the specified level.
+     *
+     * @param level the level to remove
+     */
     public void removeAtLayer(byte level) {
 
         if(level < 0 || level >= this.tiles.size()) return;
@@ -90,6 +141,13 @@ public class TileStack<TTile extends Tile>  {
 
     }
 
+    /**
+     * Places a tile into the stack.
+     * <p>
+     * The stack automatically expands if necessary.
+     *
+     * @param tile the tile to insert
+     */
     public void set(TTile tile) {
 
         while(this.tiles.size() <= tile.level()) { this.tiles.add(null); }
@@ -99,6 +157,14 @@ public class TileStack<TTile extends Tile>  {
         
     }
 
+    /**
+     * Gets {@link Tile} at selected level.
+     * 
+     *@param level the tile level
+     
+     *@return the {@link TTile} 
+     * 
+     */
     public TTile get(byte level) {
 
         if(level < 0 || level >= tiles.size()) return null;
@@ -106,6 +172,13 @@ public class TileStack<TTile extends Tile>  {
 
     }
 
+
+    /**
+     * Returns whether this stack contains any tiles.
+     *
+     * @return {@code true} if the stack contains no tiles;
+     *         {@code false} otherwise
+     */
     public boolean isEmpty() {
 
         for(TTile tile : tiles) {
@@ -117,8 +190,18 @@ public class TileStack<TTile extends Tile>  {
 
     }
 
-    // Get and Set modified state
+    /**
+     * Returns whether this stack has been modified.
+     *
+     * @return {@code true} if modified; {@code false} otherwise
+     */
     public boolean isModified() { return this.modified; }
+
+    /**
+     * Sets the modified state of this stack.
+     *
+     * @param modified the new modified state
+     */
     public void setModified(boolean modified) { this.modified = modified; }
 
 }
