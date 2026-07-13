@@ -3,6 +3,8 @@ plugins {
     id("com.vanniktech.maven.publish") version "0.36.0"
 }
 
+version = rootProject.property("heightstackVer") as String
+
 mavenPublishing {
 
     publishToMavenCentral()
@@ -12,7 +14,7 @@ mavenPublishing {
     coordinates(
         rootProject.property("group") as String,
         "heightstack",
-        rootProject.property("heightstackVer") as String
+        version.toString()
     )
 
     pom {
