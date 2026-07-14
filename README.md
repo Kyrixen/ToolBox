@@ -52,6 +52,19 @@ A lightweight color console logger.
 
 ---
 
+### Randoms
+
+A lightweight random generator.
+
+**Features**
+
+- Simple
+- Support for Int, Byte, Float, Boolean
+- Random and Seeded generators
+- Pure Java
+
+---
+
 ## Installation
 
 ### Gradle
