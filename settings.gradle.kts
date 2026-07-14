@@ -7,4 +7,4 @@ pluginManagement {
 
 rootProject.name = "kyrixen-toolbox"
 
-include("collision", "heightstack", "logger")
+include("collision", "heightstack", "logger", "randoms")
