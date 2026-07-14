@@ -73,6 +73,7 @@ A lightweight random generator.
 implementation("io.github.kyrixen:heightstack:0.1.0")
 implementation("io.github.kyrixen:collision:0.1.0")
 implementation("io.github.kyrixen:logger:0.1.0")
+implementation("io.github.kyrixen:randoms:0.1.0")
 ```
 
 ### Maven
@@ -93,6 +94,12 @@ implementation("io.github.kyrixen:logger:0.1.0")
 <dependency>
     <groupId>io.github.kyrixen</groupId>
     <artifactId>logger</artifactId>
+    <version>0.1.0</version>
+</dependency>
+
+<dependency>
+    <groupId>io.github.kyrixen</groupId>
+    <artifactId>randoms</artifactId>
     <version>0.1.0</version>
 </dependency>
 ```
