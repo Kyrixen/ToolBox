@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package randoms.random;
+package dev.kyrixen.libs.randoms.random;
 
 import java.util.Random;
 

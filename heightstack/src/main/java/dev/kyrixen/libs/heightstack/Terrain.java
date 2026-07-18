@@ -13,15 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package heightstack;
+package dev.kyrixen.libs.heightstack;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import heightstack.chunk.Chunk;
-import heightstack.chunk.ChunkPos;
-import heightstack.chunk.tile.Tile;
-import heightstack.chunk.tile.TileStack;
+import dev.kyrixen.libs.heightstack.chunk.Chunk;
+import dev.kyrixen.libs.heightstack.chunk.ChunkPos;
+import dev.kyrixen.libs.heightstack.chunk.tile.Tile;
+import dev.kyrixen.libs.heightstack.chunk.tile.TileStack;
 
 
 /**

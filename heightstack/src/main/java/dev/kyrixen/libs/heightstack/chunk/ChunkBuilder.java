@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package heightstack.chunk;
+package dev.kyrixen.libs.heightstack.chunk;
 
-import heightstack.chunk.tile.Tile;
-import heightstack.chunk.tile.TileStack;
+import dev.kyrixen.libs.heightstack.chunk.tile.Tile;
+import dev.kyrixen.libs.heightstack.chunk.tile.TileStack;
 
 
 /**
